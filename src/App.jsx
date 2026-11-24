@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import "./App.css";
 
@@ -7,21 +7,21 @@ function App() {
     const counter = useRef(0);
     const [other, setOther] = useState(0);
 
-    const costlyFunction = () => {
+    const costlyResult = useMemo(() => {
         for (let i = 0; i < 2_000_000_000; i++) {
             // Simulate a costly operation
         }
         counter.current += 1;
 
         return selected * 2;
-    };
+    },[selected]);
 
     return (
         <>
             <p>
                 Selected: {selected}
                 <br />
-                Result: {costlyFunction()}
+                Result: {costlyResult}
                 <br />
                 Other: {other}
                 <br />
